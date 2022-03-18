@@ -50,3 +50,24 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+/** Grabs data from form, and adds new story to the page */
+
+// < !--author title url-- >
+// get form value
+//call addStory()
+//add story through DOM
+
+async function getDataAddStory(){
+  const storyAuthor = $("#story-author").val();
+  const storyTitle = $("#story-title").val();
+  const storyUrl = $("#story-url").val();
+
+  let newStoryData = { author:storyAuthor, title:storyTitle, url:storyUrl };
+
+  let story = await storyList.addStory(currentUser, newStoryData);
+
+  await getAndShowStoriesOnStart();
+
+}
+$("#story-form").on('click',"#story-input-button", getDataAddStory);
