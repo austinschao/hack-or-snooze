@@ -213,21 +213,37 @@ class User {
     }
   }
 
-  // $(".star")
 
   /** sends username,token,storyId to API to add a favorite  */
 
-  async sendFavoriteStoryDataToAPI(user,story){
+  async sendFavoriteStoryDataToAPI(user,storyId){
     const response = await axios({
       method: 'POST',
-      url: `${BASE_URL}/users/${user.username}/favorites/${story.storyId}`,
+      url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
       data : {'token': user.loginToken},
     });
-    console.log(response.data);
+
+    console.log(response)
   }
-
-
-
-
 }
+
+/** Clicking on a favorite will retrieve the selected storyId */
+
+$('.stories-list').on('click', 'li', (evt) => {
+  const selectedStoryId = evt.currentTarget.id;
+  const $starTarget = $(evt.target);
+  const $starTargetClassName =$($starTarget.className);
+
+
+  $($starTarget[0]).toggleClass('fas far');
+
+
+  // if ($starTarget.hasClass('far')) {
+  //   console.log('it went here')
+  //   currentUser.sendFavoriteStoryDataToAPI(currentUser, selectedStoryId);
+  // }
+  // } else {
+  //   // remove it
+  // }
+});
 
