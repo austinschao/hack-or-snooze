@@ -36,14 +36,35 @@
 <nav>
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
+    <a class="nav-link" href="#" id="nav-link-show-form">Submit</a>
+    <a class="nav-link" href="#" id="nav-favorite-stories">Favorites</a>
   </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
   </div>
-  <a href="#" id="nav-link-show-form">submit</a>
 </nav>
+
+
+<!-- area for submitting stories -->
+
+<form action="#" id="story-form" class="account-form hidden">
+  <h4>Submit a Story</h4>
+  <div class="login-input">
+    <label for="author">author</label>
+    <input id="story-author" type="text" placeholder="author">
+  </div>
+  <div class="login-input">
+    <label for="title">title</label>
+    <input id="story-title" type="text" placeholder="title">
+  </div>
+  <div class="login-input">
+    <label for="url">url</label>
+    <input id="story-url" type="text" placeholder="http://www.example.com">
+  </div>
+  <input id="story-input-button" type="button" value="submit">
+</form>
 
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
@@ -56,25 +77,13 @@
 
 </section>
 
-<!-- adding a new story -->
-<!-- author title url -->
-<h4>
-  <form action="#" id="story-form" class="account-form hidden">
-    <div class="login-input">
-      <label for="author">author</label>
-      <input id="story-author" type="text">
-    </div>
-    <div class="login-input">
-      <label for="title">title</label>
-      <input id="story-title" type="text">
-    </div>
-    <div class="login-input">
-      <label for="url">url</label>
-      <input id="story-url" type="text">
-    </div>
-    <input id="story-input-button" type="button" value="submit">
-  </form>
-</h4>
+<!-- area for favorite stories -->
+<section class="favorite-stories-container container">
+  <!-- List of all favorite stories -->
+  <ol id="all-favorite-stories-list" class="stories-list"></ol>
+
+</section>
+
 
 <!-- Login and signup forms -->
 <section class="account-forms-container container">

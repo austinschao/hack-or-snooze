@@ -25,6 +25,7 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
+        <a href="#" class="fa-star far star"</a>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -50,24 +51,3 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
-
-/** Grabs data from form, and adds new story to the page */
-
-// < !--author title url-- >
-// get form value
-//call addStory()
-//add story through DOM
-
-async function getDataAddStory(){
-  const storyAuthor = $("#story-author").val();
-  const storyTitle = $("#story-title").val();
-  const storyUrl = $("#story-url").val();
-
-  let newStoryData = { author:storyAuthor, title:storyTitle, url:storyUrl };
-
-  let story = await storyList.addStory(currentUser, newStoryData);
-
-  await getAndShowStoriesOnStart();
-
-}
-$("#story-form").on('click',"#story-input-button", getDataAddStory);

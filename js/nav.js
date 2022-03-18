@@ -41,5 +41,5 @@ function updateNavOnLogin() {
 /** when user clicks the new 'submit' navbar link, new story form appears */
 
 $("#nav-link-show-form").on("click", function(){
-  $storyFrom.show();
+  $storyForm.show();
 });
