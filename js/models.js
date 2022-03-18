@@ -222,28 +222,46 @@ class User {
       url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
       data : {'token': user.loginToken},
     });
-
     console.log(response)
+    user.favorites.push(response
+      // new Story(
+      // {
+      //   storyId: response.data.user.favorites[this.favorites.length-1].storyId,
+      //   title: response.data.user.favorites[this.favorites.length-1].title,
+      //   author: response.data.user.favorites[this.favorites.length-1].author,
+      //   url: response.data.user.favorites[this.favorites.length-1].url,
+      //   username: response.data.user.username,
+      //   createdAt: response.data.user.createdAt
+      // })
+    );
+  }
+  /** Clicking on a favorite will retrieve the selected storyId */
+
+  async removeFavoriteStoryFromAPI(user, storyId){
+    const response = await axios({
+      method: 'DELETE',
+      url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
+      data : { 'token': user.loginToken },
+    })
+    // console.log(response);
   }
 }
+// storyId, title, author, url, username, createdAt
 
-/** Clicking on a favorite will retrieve the selected storyId */
 
-$('.stories-list').on('click', 'li', (evt) => {
-  const selectedStoryId = evt.currentTarget.id;
+$('.stories-list').on('click', '.star', (evt) => {
+
+  const selectedStoryId = evt.currentTarget.parentNode.id;
   const $starTarget = $(evt.target);
   const $starTargetClassName =$($starTarget.className);
 
 
   $($starTarget[0]).toggleClass('fas far');
 
+  currentUser.sendFavoriteStoryDataToAPI(currentUser, selectedStoryId);
 
-  // if ($starTarget.hasClass('far')) {
-  //   console.log('it went here')
-  //   currentUser.sendFavoriteStoryDataToAPI(currentUser, selectedStoryId);
-  // }
-  // } else {
-  //   // remove it
-  // }
+  if ($starTarget.hasClass('fa-star fas')) {
+
+    currentUser.removeFavoriteStoryFromAPI(currentUser, selectedStoryId);
+  }
 });
-
