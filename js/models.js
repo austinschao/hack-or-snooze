@@ -220,12 +220,10 @@ class User {
   async sendFavoriteStoryDataToAPI(user,story){
     const response = await axios({
       method: 'POST',
-      data : 
-      { username: user.username, 
-        url: `${BASE_URL}/users/${user.username}/favorites/${story.storyId}`,
-        storyId: story.storyId },
-      'token': user.loginToken
+      url: `${BASE_URL}/users/${user.username}/favorites/${story.storyId}`,
+      data : {'token': user.loginToken},
     });
+    console.log(response.data);
   }
 
 
