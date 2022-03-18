@@ -212,4 +212,24 @@ class User {
       return null;
     }
   }
+
+  // $(".star")
+
+  /** sends username,token,storyId to API to add a favorite  */
+
+  async sendFavoriteStoryDataToAPI(user,story){
+    const response = await axios({
+      method: 'POST',
+      data : 
+      { username: user.username, 
+        url: `${BASE_URL}/users/${user.username}/favorites/${story.storyId}`,
+        storyId: story.storyId },
+      'token': user.loginToken
+    });
+  }
+
+
+
+
 }
+

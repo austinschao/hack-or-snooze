@@ -1,4 +1,4 @@
-"use strict";
+  "use strict";
 
 // global to hold the User instance of the currently-logged-in user
 let currentUser;
