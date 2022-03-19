@@ -222,18 +222,20 @@ class User {
       url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
       data : {'token': user.loginToken},
     });
-    console.log(response)
-    user.favorites.push(response
-      // new Story(
-      // {
-      //   storyId: response.data.user.favorites[this.favorites.length-1].storyId,
-      //   title: response.data.user.favorites[this.favorites.length-1].title,
-      //   author: response.data.user.favorites[this.favorites.length-1].author,
-      //   url: response.data.user.favorites[this.favorites.length-1].url,
-      //   username: response.data.user.username,
-      //   createdAt: response.data.user.createdAt
-      // })
-    );
+
+    console.log(response, '===response')
+
+    console.log(response.data.user.favorites.storyId, '===response data favoirte')
+
+    console.log(storyId, '===sendfavoritestoryId')
+
+    for (let story of storyList.stories) {
+      console.log(story.storyId, '===forloopstoryid')
+      if (story.storyId === storyId) {
+        console.log('its adding a new story')
+        user.favorites.push(story);
+      }
+    }
   }
   /** Clicking on a favorite will retrieve the selected storyId */
 
@@ -243,7 +245,15 @@ class User {
       url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
       data : { 'token': user.loginToken },
     })
-    // console.log(response);
+    console.log(response, '===delete response')
+    const favoriteStories = user.favorites;
+    // console.log(favoriteStories[0])
+
+    const newFavorites = favoriteStories.filter(story => {
+      return story.storyId !== storyId;
+    });
+
+    console.log(newFavorites, '===newfavorites')
   }
 }
 // storyId, title, author, url, username, createdAt
@@ -257,11 +267,12 @@ $('.stories-list').on('click', '.star', (evt) => {
 
 
   $($starTarget[0]).toggleClass('fas far');
+  console.log($starTarget[0])
 
-  currentUser.sendFavoriteStoryDataToAPI(currentUser, selectedStoryId);
-
-  if ($starTarget.hasClass('fa-star fas')) {
-
+  if (!$starTarget.hasClass('far')) {
+    console.log('its gonna add')
+    currentUser.sendFavoriteStoryDataToAPI(currentUser, selectedStoryId);
+  } else {
     currentUser.removeFavoriteStoryFromAPI(currentUser, selectedStoryId);
   }
 });
